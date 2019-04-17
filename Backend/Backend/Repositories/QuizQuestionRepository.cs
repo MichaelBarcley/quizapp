@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Backend.Data;
 using Backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repositories
 {
@@ -16,26 +17,26 @@ namespace Backend.Repositories
             _quizContext = quizContext;
         }
 
-        public void Add(QuizQuestion question)
+        public async Task AddAsync(QuizQuestion question)
         {
             _quizContext.Add(question);
-            _quizContext.SaveChanges();
+            await _quizContext.SaveChangesAsync();
         }
 
-        public void DeleteById(long Id)
+        public async Task DeleteByIdAsync(long Id)
         {
-            _quizContext.Remove(GetById(Id));
-            _quizContext.SaveChanges();
+            _quizContext.Remove(GetByIdAsync(Id));
+            await _quizContext.SaveChangesAsync();
         }
 
-        public IEnumerable<QuizQuestion> GetAll()
+        public async Task<IEnumerable<QuizQuestion>> GetAllAsync()
         {
-            return _quizContext.QuizQuestions;
+            return await _quizContext.QuizQuestions.ToListAsync();
         }
 
-        public QuizQuestion GetById(long Id)
+        public async Task<QuizQuestion> GetByIdAsync(long Id)
         {
-            return _quizContext.QuizQuestions.First(question => question.Id == Id);
+            return await _quizContext.QuizQuestions.FirstOrDefaultAsync(question => question.Id == Id);
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Backend.Repositories
 {
     public interface IQuizQuestionRepository
     {
-        IEnumerable<QuizQuestion> GetAll();
-        QuizQuestion GetById(long Id);
-        void Add(QuizQuestion question);
-        void DeleteById(long Id);
+        Task<IEnumerable<QuizQuestion>> GetAllAsync();
+        Task<QuizQuestion> GetByIdAsync(long Id);
+        Task AddAsync(QuizQuestion question);
+        Task DeleteByIdAsync(long Id);
     }
 }
