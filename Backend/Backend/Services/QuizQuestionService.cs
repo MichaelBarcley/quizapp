@@ -2,10 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Backend.Models;
+using Backend.Repositories;
 
 namespace Backend.Services
 {
-    interface QuizQuestionService : IQuizQuestionService
+    public class QuizQuestionService : IQuizQuestionService
     {
+        private readonly IQuizQuestionRepository questionRepository;
+
+        public QuizQuestionService(IQuizQuestionRepository _questionRepository)
+        {
+            questionRepository = _questionRepository;
+        }
+
+        public Task AddAsync(QuizQuestion question)
+        {
+            return questionRepository.AddAsync(question);
+        }
+
+        public Task DeleteByIdAsync(long id)
+        {
+            return questionRepository.DeleteByIdAsync(id);
+        }
+
+        public Task<IEnumerable<QuizQuestion>> GetAllAsync()
+        {
+            return questionRepository.GetAllAsync();
+        }
+
+        public Task<QuizQuestion> GetByIdAsync(long id)
+        {
+            return questionRepository.GetByIdAsync(id);
+        }
     }
 }
