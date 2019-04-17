@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Backend.Data;
+using Backend.Repositories;
+using Backend.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +19,9 @@ namespace Backend
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IQuizQuestionRepository, QuizQuestionRepository>();
+            services.AddScoped<IQuizQuestionService, QuizQuestionService>();
+
             services.AddMvc();
 
             var connection = @"Server=(localdb)\mssqllocaldb;Database=QuizApp;Trusted_Connection=True;ConnectRetryCount=0";
@@ -30,6 +35,8 @@ namespace Backend
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMvc();
         }
     }
 }
