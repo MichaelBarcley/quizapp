@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Backend.Services
 {
-    interface IQuizQuestionService
+    public interface IQuizQuestionService
     {
         Task<IEnumerable<QuizQuestion>> GetAllAsync();
         Task<QuizQuestion> GetByIdAsync(long Id);
