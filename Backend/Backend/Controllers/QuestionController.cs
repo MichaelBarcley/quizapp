@@ -24,10 +24,10 @@ namespace Backend.Controllers
         public async Task<IActionResult> GetAllQuestions()
         {
             var questions = await questionService.GetAllAsync();
-            return Json(questions);
+            return StatusCode(200, questions);
         }
 
-        [HttpPost("questions/add")]
+        [HttpPost("questions")]
         public async Task<IActionResult> AddQuestion([FromBody] QuizQuestion question)
         {
             if (question.IsAnyPropertyNull())
@@ -36,6 +36,13 @@ namespace Backend.Controllers
             }
             await questionService.AddAsync(question);
             return StatusCode(201, "noice");
+        }
+
+        [HttpGet("random")]
+        public async Task<IActionResult> GetRandomQuestion()
+        {
+            var randomQuestion = await questionService.GetRandomAsync();
+            return StatusCode(200, randomQuestion);
         }
     }
 }
