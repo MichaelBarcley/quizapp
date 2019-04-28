@@ -1,4 +1,5 @@
-﻿using Backend.Models;
+﻿using Backend.Extensions;
+using Backend.Models;
 using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,8 +28,12 @@ namespace Backend.Controllers
         }
 
         [HttpPost("questions/add")]
-        public async Task<IActionResult> AddQuestion(QuizQuestion question)
+        public async Task<IActionResult> AddQuestion([FromBody] QuizQuestion question)
         {
+            if (question.IsAnyPropertyNull())
+            {
+                return StatusCode(400, "not so noice");
+            }
             await questionService.AddAsync(question);
             return StatusCode(201, "noice");
         }
