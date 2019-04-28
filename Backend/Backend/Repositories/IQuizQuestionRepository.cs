@@ -10,6 +10,7 @@ namespace Backend.Repositories
     {
         Task<IEnumerable<QuizQuestion>> GetAllAsync();
         Task<QuizQuestion> GetByIdAsync(long Id);
+        Task<long> GetDbEntriesNumberAsync();
         Task AddAsync(QuizQuestion question);
         Task DeleteByIdAsync(long Id);
     }

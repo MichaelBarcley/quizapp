@@ -38,5 +38,10 @@ namespace Backend.Repositories
         {
             return await _quizContext.QuizQuestions.FirstOrDefaultAsync(question => question.Id == Id);
         }
+
+        public async Task<long> GetDbEntriesNumberAsync()
+        {
+            return await _quizContext.QuizQuestions.CountAsync();
+        }
     }
 }

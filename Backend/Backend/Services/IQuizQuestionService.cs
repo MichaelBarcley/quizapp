@@ -10,6 +10,7 @@ namespace Backend.Services
     {
         Task<IEnumerable<QuizQuestion>> GetAllAsync();
         Task<QuizQuestion> GetByIdAsync(long Id);
+        Task<QuizQuestion> GetRandomAsync();
         Task AddAsync(QuizQuestion question);
         Task DeleteByIdAsync(long Id);
     }

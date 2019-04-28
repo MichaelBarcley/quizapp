@@ -35,5 +35,13 @@ namespace Backend.Services
         {
             return questionRepository.GetByIdAsync(id);
         }
+
+        public Task<QuizQuestion> GetRandomAsync()
+        {
+            Random rnd = new Random();
+            int questionDbSize = (int)questionRepository.GetDbEntriesNumberAsync().Result;
+            int randomQuestionId = rnd.Next(1, questionDbSize);
+            return questionRepository.GetByIdAsync(randomQuestionId);
+        }
     }
 }
