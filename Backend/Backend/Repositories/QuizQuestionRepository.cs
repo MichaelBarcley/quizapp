@@ -10,38 +10,38 @@ namespace Backend.Repositories
 {
     public class QuizQuestionRepository : IQuizQuestionRepository
     {
-        private readonly QuizContext _quizContext;
+        private readonly QuizContext quizContext;
 
-        public QuizQuestionRepository(QuizContext quizContext)
+        public QuizQuestionRepository(QuizContext _quizContext)
         {
-            _quizContext = quizContext;
+            quizContext = _quizContext;
         }
 
         public async Task AddAsync(QuizQuestion question)
         {
-            _quizContext.Add(question);
-            await _quizContext.SaveChangesAsync();
+            quizContext.Add(question);
+            await quizContext.SaveChangesAsync();
         }
 
         public async Task DeleteByIdAsync(long Id)
         {
-            _quizContext.Remove(GetByIdAsync(Id));
-            await _quizContext.SaveChangesAsync();
+            quizContext.Remove(GetByIdAsync(Id));
+            await quizContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<QuizQuestion>> GetAllAsync()
         {
-            return await _quizContext.QuizQuestions.Include(question => question.Answers).ToListAsync(); ;
+            return await quizContext.QuizQuestions.Include(question => question.Answers).ToListAsync(); ;
         }
 
         public async Task<QuizQuestion> GetByIdAsync(long Id)
         {
-            return await _quizContext.QuizQuestions.FirstOrDefaultAsync(question => question.Id == Id);
+            return await quizContext.QuizQuestions.FirstOrDefaultAsync(question => question.Id == Id);
         }
 
         public async Task<long> GetDbEntriesNumberAsync()
         {
-            return await _quizContext.QuizQuestions.CountAsync();
+            return await quizContext.QuizQuestions.CountAsync();
         }
     }
 }
