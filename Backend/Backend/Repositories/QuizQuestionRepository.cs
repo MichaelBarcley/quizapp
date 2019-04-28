@@ -31,7 +31,7 @@ namespace Backend.Repositories
 
         public async Task<IEnumerable<QuizQuestion>> GetAllAsync()
         {
-            return await _quizContext.QuizQuestions.ToListAsync();
+            return await _quizContext.QuizQuestions.Include(question => question.Answers).ToListAsync(); ;
         }
 
         public async Task<QuizQuestion> GetByIdAsync(long Id)

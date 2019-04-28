@@ -26,25 +26,25 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    QuestionIdId = table.Column<long>(nullable: true),
                     Option = table.Column<string>(nullable: true),
-                    IsCorrect = table.Column<bool>(nullable: false)
+                    IsCorrect = table.Column<bool>(nullable: false),
+                    QuizQuestionId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Answers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Answers_QuizQuestions_QuestionIdId",
-                        column: x => x.QuestionIdId,
+                        name: "FK_Answers_QuizQuestions_QuizQuestionId",
+                        column: x => x.QuizQuestionId,
                         principalTable: "QuizQuestions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Answers_QuestionIdId",
+                name: "IX_Answers_QuizQuestionId",
                 table: "Answers",
-                column: "QuestionIdId");
+                column: "QuizQuestionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

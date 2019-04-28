@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    [Migration("20190228135015_InitialCreate")]
+    [Migration("20190428161801_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,11 +31,11 @@ namespace Backend.Migrations
 
                     b.Property<string>("Option");
 
-                    b.Property<long?>("QuestionIdId");
+                    b.Property<long?>("QuizQuestionId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuestionIdId");
+                    b.HasIndex("QuizQuestionId");
 
                     b.ToTable("Answers");
                 });
@@ -55,9 +55,9 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.Answer", b =>
                 {
-                    b.HasOne("Backend.Models.QuizQuestion", "QuestionId")
+                    b.HasOne("Backend.Models.QuizQuestion")
                         .WithMany("Answers")
-                        .HasForeignKey("QuestionIdId");
+                        .HasForeignKey("QuizQuestionId");
                 });
 #pragma warning restore 612, 618
         }
