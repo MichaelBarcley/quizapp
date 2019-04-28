@@ -36,7 +36,7 @@ namespace Backend.Repositories
 
         public async Task<QuizQuestion> GetByIdAsync(long Id)
         {
-            return await quizContext.QuizQuestions.FirstOrDefaultAsync(question => question.Id == Id);
+            return await quizContext.QuizQuestions.Include(question => question.Answers).FirstOrDefaultAsync(question => question.Id == Id);
         }
 
         public async Task<long> GetDbEntriesNumberAsync()
