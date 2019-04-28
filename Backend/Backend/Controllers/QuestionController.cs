@@ -20,9 +20,17 @@ namespace Backend.Controllers
         }
 
         [HttpGet("questions")]
-        public async Task<IEnumerable<QuizQuestion>> GetAllQuestions()
+        public async Task<IActionResult> GetAllQuestions()
         {
-            return await questionService.GetAllAsync();
+            var questions = await questionService.GetAllAsync();
+            return Json(questions);
+        }
+
+        [HttpPost("questions/add")]
+        public async Task<IActionResult> AddQuestion(QuizQuestion question)
+        {
+            await questionService.AddAsync(question);
+            return StatusCode(201, "noice");
         }
     }
 }
